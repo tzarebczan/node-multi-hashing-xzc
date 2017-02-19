@@ -31,6 +31,7 @@
                 "Lyra2RE.c",
                 "Lyra2REV2.c",
 		"Lyra2Z.c",
+		"pascal.c",
                 "sha3/sph_hefty1.c",
                 "sha3/sph_fugue.c",
                 "sha3/aes_helper.c",
@@ -56,11 +57,13 @@
                 "crypto/c_skein.c",
                 "crypto/hash.c",
                 "crypto/aesb.c",
+	"sph/sha2.c",
                 "crypto/wild_keccak.cpp",
             ],
             "include_dirs": [
                 "crypto",
                 "sha3",
+"sph",
                 "<!(node -e \"require('nan')\")"
             ],
             "cflags_cc": [
