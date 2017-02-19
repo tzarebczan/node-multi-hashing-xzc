@@ -27,6 +27,7 @@ extern "C" {
     #include "Lyra2.h"
     #include "Lyra2REV2.h"
     #include "Lyra2Z.h"
+    #include "pascal.h"	
 }
 
 #define THROW_ERROR_EXCEPTION(x) NanThrowError(x)
@@ -588,6 +589,26 @@ NAN_METHOD(lyra2z) {
     NanReturnValue(
         NanNewBufferHandle(output, 32)
     );
+
+NAN_METHOD(pascal) {
+    NanScope();
+
+    if (args.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = args[0]->ToObject();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char output[32];
+
+    pascal_regenhash(input, output);
+
+    NanReturnValue(
+        NanNewBufferHandle(output, 32)
+    );
 }
 
 void init(Handle<Object> exports) {
@@ -614,6 +635,8 @@ void init(Handle<Object> exports) {
     exports->Set(NanNew<String>("lyra2re"), NanNew<FunctionTemplate>(lyra2re)->GetFunction());
     exports->Set(NanNew<String>("lyra2rev2"), NanNew<FunctionTemplate>(lyra2rev2)->GetFunction());
     exports->Set(NanNew<String>("lyra2z"), NanNew<FunctionTemplate>(lyra2z)->GetFunction());
+    exports->Set(NanNew<String>("pascal"), NanNew<FunctionTemplate>(pascal)->GetFunction()
 }
+
 
 NODE_MODULE(multihashing, init)
