@@ -1,6 +1,7 @@
 #ifndef PASCAL_H
 #define PASCAL_H
 
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -12,5 +13,6 @@ void pascal_regenhash(struct work *work);
 
 #ifdef __cplusplus
 }
+#endif
 
 #endif /* PASCAL_H */

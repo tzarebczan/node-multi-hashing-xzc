@@ -589,6 +589,7 @@ NAN_METHOD(lyra2z) {
     NanReturnValue(
         NanNewBufferHandle(output, 32)
     );
+}
 
 NAN_METHOD(pascal) {
     NanScope();
