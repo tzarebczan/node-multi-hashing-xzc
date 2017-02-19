@@ -70,7 +70,7 @@ void pascal_hash(const char* input, char* output)
 	sph_sha256(&ctx_sha, hash, 32);
 	sph_sha256_close(&ctx_sha, hash);
 
-	memcpy(input, hash, 32);
+	memcpy(output, hash, 32);
 
 }
 /*
