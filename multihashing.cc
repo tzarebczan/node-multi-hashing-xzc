@@ -605,7 +605,7 @@ NAN_METHOD(pascal) {
     char * input = Buffer::Data(target);
     char output[32];
 	uint32_t input_len = Buffer::Length(target);
-	pascal_hash(input, output, input_len);
+	pascal_hash(input, output);
 
     NanReturnValue(
         NanNewBufferHandle(output, 32)

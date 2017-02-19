@@ -12,7 +12,7 @@ void pascal_midstate(struct work *work);
 void pascal_regenhash(struct work *work);
 */
 
-void pascal_hash(const char* input, char* output, uint32_t len);
+void pascal_hash(const char* input, char* output);
 
 #ifdef __cplusplus
 }

@@ -40,7 +40,7 @@
 #include "pascal.h"
 
 static const uint32_t diff1targ_pascal = 0x000000ff;
-
+/*
 void pascalhash(void *state, const void *input)
 {
   sph_sha256_context ctx_sha;
@@ -56,8 +56,8 @@ void pascalhash(void *state, const void *input)
 
   memcpy(state, hash, 32);
 
-}
-void pascal_hash(const char* input, char* output, uint32_t len)
+}*/
+void pascal_hash(const char* input, char* output)
 {
 	sph_sha256_context ctx_sha;
 	uint32_t hash[16];
@@ -70,10 +70,10 @@ void pascal_hash(const char* input, char* output, uint32_t len)
 	sph_sha256(&ctx_sha, hash, 32);
 	sph_sha256_close(&ctx_sha, hash);
 
-	memcpy(output, hash, 32);
+	memcpy(input, hash, 32);
 
 }
-
+/*
 void pascal_midstate(struct work *work)
 {
   sph_sha256_context     ctx_sha;
@@ -87,17 +87,13 @@ void pascal_midstate(struct work *work)
   memcpy(work->midstate, ctx_sha.val, 32);
   endian_flip32(work->midstate, work->midstate);
 
-/*
-  char *strdata, *strmidstate;
-  strdata = bin2hex(work->data, 192);
-  strmidstate = bin2hex(work->midstate, 32);
-  applog(LOG_DEBUG, "data %s midstate %s", strdata, strmidstate);
-*/
-}
 
+}
+*/
 static const uint32_t diff1targ = 0x0000ffff;
 
 /* Used externally as confirmation of correct OCL code */
+
 int pascal_test(unsigned char *pdata, const unsigned char *ptarget, uint32_t nonce)
 {
 	uint32_t tmp_hash7, Htarg = le32toh(((const uint32_t *)ptarget)[7]);
@@ -108,17 +104,13 @@ int pascal_test(unsigned char *pdata, const unsigned char *ptarget, uint32_t non
 	pascalhash(ohash, data);
 	tmp_hash7 = be32toh(ohash[7]);
 
-	applog(LOG_DEBUG, "htarget %08lx diff1 %08lx hash %08lx",
-				(long unsigned int)Htarg,
-				(long unsigned int)diff1targ,
-				(long unsigned int)tmp_hash7);
 	if (tmp_hash7 > diff1targ)
 		return -1;
 	if (tmp_hash7 > Htarg)
 		return 0;
 	return 1;
 }
-
+/*
 void pascal_regenhash(struct work *work)
 {
         uint32_t data[64];
@@ -131,3 +123,4 @@ void pascal_regenhash(struct work *work)
         pascalhash(hash, data);
         swab256(ohash, hash);
 }
+		*/
