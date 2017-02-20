@@ -58,7 +58,8 @@
                 "crypto/hash.c",
                 "crypto/aesb.c",
 	"sph/sha2.c",
-                "crypto/wild_keccak.cpp",
+ "sha3/sph_ripemd.c",    "sha3/sha2.c",
+ "           "crypto/wild_keccak.cpp",
             ],
             "include_dirs": [
                 "crypto",
