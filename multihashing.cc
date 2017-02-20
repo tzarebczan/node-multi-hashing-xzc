@@ -28,6 +28,7 @@ extern "C" {
     #include "Lyra2REV2.h"
     #include "Lyra2Z.h"
     #include "pascal.h"	
+#include "lbry.h"	
 }
 
 #define THROW_ERROR_EXCEPTION(x) NanThrowError(x)
@@ -589,6 +590,26 @@ NAN_METHOD(lyra2z) {
     NanReturnValue(
         NanNewBufferHandle(output, 32)
     );
+}
+NAN_METHOD(lbry) {
+	NanScope();
+
+	if (args.Length() < 1)
+		return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+	Local<Object> target = args[0]->ToObject();
+
+	if (!Buffer::HasInstance(target))
+		return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+	char * input = Buffer::Data(target);
+	char output[32];
+
+	lbry_hash(input, output);
+
+	NanReturnValue(
+		NanNewBufferHandle(output, 32)
+		);
 }
 
 NAN_METHOD(pascal) {
