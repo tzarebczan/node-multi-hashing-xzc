@@ -658,6 +658,7 @@ void init(Handle<Object> exports) {
     exports->Set(NanNew<String>("lyra2rev2"), NanNew<FunctionTemplate>(lyra2rev2)->GetFunction());
     exports->Set(NanNew<String>("lyra2z"), NanNew<FunctionTemplate>(lyra2z)->GetFunction());
 	exports->Set(NanNew<String>("pascal"), NanNew<FunctionTemplate>(pascal)->GetFunction());
+	exports->Set(NanNew<String>("pascal"), NanNew<FunctionTemplate>(lbry)->GetFunction());
 }
 
 
